@@ -17,6 +17,12 @@
       },
       "api": {
         "livechat": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dod9xsij8k84m",
+          "type": "cicd"
+        }
       }
     }
   }

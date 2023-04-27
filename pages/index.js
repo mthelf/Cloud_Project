@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-import { withAuthenticator } from '@aws-amplify/ui-react'
+import styles from "../styles/Home.module.css";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 import { API, Auth, withSSRContext, graphqlOperation } from "aws-amplify";
 import { listMessages } from "../graphql/queries";
 import { createMessage } from "../graphql/mutations";
-import { onCreateMessage } from "../graphql/subscriptions";
 import Message from "../components/message";
-const inter = Inter({ subsets: ['latin'] })
+import { onCreateMessage } from "../graphql/subscriptions";
+
 
 function Home({ messages }) {
   // Sets the stateMessages value to be initialized with whatever messages we

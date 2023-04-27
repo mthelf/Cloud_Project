@@ -12,7 +12,7 @@ function Home({ messages }) {
   // Sets the stateMessages value to be initialized with whatever messages we
   // returned from getServersideProps 
   const [stateMessages, setStateMessages] = useState([...messages]);
-  const [messsageText, setMessageText] = useState("");
+  const [messageText, setMessageText] = useState("");
   const [user, setUser] = useState(null);
 
   useEffect(() => {

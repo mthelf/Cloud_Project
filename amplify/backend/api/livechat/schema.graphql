@@ -1,0 +1,6 @@
+type Message @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  owner: String!
+  message: String!
+}
+ 

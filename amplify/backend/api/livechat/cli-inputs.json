@@ -7,11 +7,7 @@
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authlivechatd1a5417f"
     },
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "NONE"
-      }
-    },
+    "conflictResolution": {},
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"

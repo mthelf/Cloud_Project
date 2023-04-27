@@ -12,10 +12,10 @@ import Message from "../components/message";
 const inter = Inter({ subsets: ['latin'] })
 
 function Home({ messages }) {
-  const [user, setUser] = useState(null);
   // Sets the stateMessages value to be initialized with whatever messages we
   // returned from getServersideProps 
   const [stateMessages, setStateMessages] = useState([...messages]);
+  const [messsageText, setMessageText] = useState("");
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -29,7 +29,37 @@ function Home({ messages }) {
     };
 
     fetchUser();
-  }, [])
+
+    // Subscribe to creation of message
+    const subscription = API.graphql(
+      graphqlOperation(onCreateMessage)
+    ).subscribe({
+      next: ({ provider, value }) => {
+        setStateMessages((stateMessages) => [
+          ...stateMessages,
+          value.data.onCreateMessage,
+        ]);
+      },
+      error: (error) => console.warn(error),
+    });
+  }, []);
+
+  useEffect(() => {
+    async function getMessages() {
+      try {
+        const messagesReq = await API.graphql({
+          query: listMessages,
+          authMode: "AMAZON_COGNITO_USER_POOLS",
+        });
+        setStateMessages([...messagesReq.data.listMessages.items]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getMessages();
+  }, [user]);
+
+
 
   const handleSubmit = async (event) => {
     // Prevent the page from reloading

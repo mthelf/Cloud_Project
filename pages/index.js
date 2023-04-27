@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { API, Auth, withSSRContext, graphqlOperation } from "aws-amplify";
-import { listMessages } from "../src/graphql/queries";
-import { createMessage } from "../src/graphql/mutations";
+import { listMessages } from "../graphql/queries";
+import { createMessage } from "../graphql/mutations";
 import Message from "../components/message";
-import { onCreateMessage } from "../src/graphql/subscriptions";
-
+import { onCreateMessage } from "../graphql/subscriptions";
 
 function Home({ messages }) {
-  // Sets the stateMessages value to be initialized with whatever messages we
-  // returned from getServersideProps 
   const [stateMessages, setStateMessages] = useState([...messages]);
   const [messageText, setMessageText] = useState("");
   const [user, setUser] = useState(null);
@@ -56,8 +53,6 @@ function Home({ messages }) {
     getMessages();
   }, [user]);
 
-
-
   const handleSubmit = async (event) => {
     // Prevent the page from reloading
     event.preventDefault();
@@ -84,7 +79,6 @@ function Home({ messages }) {
       console.error(err);
     }
   };
-
 
   if (user) {
     return (
@@ -127,7 +121,6 @@ function Home({ messages }) {
   } else {
     return <p>Loading...</p>;
   }
-
 }
 
 export default withAuthenticator(Home);
